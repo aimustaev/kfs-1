@@ -1,0 +1,10 @@
+{
+    "C_Cpp.errorSquiggles": "disabled",
+    "files.associations": {
+        "*.ts": "typescript",
+        "terminal.h": "c",
+        "kernel.h": "c",
+        "types.h": "c",
+        "utils.h": "c"
+    }
+}
