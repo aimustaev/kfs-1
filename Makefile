@@ -17,6 +17,7 @@ RESET   	=	\033[0m
 HDIR = headers
 
 HEAD = kernel.h
+HEAD += io.h
 HEAD += terminal.h
 HEAD += types.h
 HEAD += utils.h
@@ -49,6 +50,7 @@ TRM_SRC+=setcolor.c
 TRM_SRC+=initialize.c
 TRM_SRC+=move_cursor.c
 TRM_SRC+=set_value_by_position.c
+TRM_SRC+=cursor.c
 TRM_SOURCES = $(addprefix $(TRM_SRC_PATH)/,$(TRM_SRC))
 TRM_OBJECTS = $(addprefix $(TRM_OBJ_PATH)/,$(TRM_SRC:.c=.o))
 
@@ -59,19 +61,35 @@ UTL_SRC=kfs_strlen.c
 UTL_SRC+=kfs_write.c
 UTL_SRC+=kfs_putchar.c
 UTL_SRC+=kfs_putstr.c
+UTL_SRC+=kfs_strcmp.c
+UTL_SRC+=kfs_itoa.c
+UTL_SRC+=kfs_memset.c
+UTL_SRC+=kfs_intlen.c
 
 UTL_SOURCES = $(addprefix $(UTL_SRC_PATH)/,$(UTL_SRC))
 UTL_OBJECTS = $(addprefix $(UTL_OBJ_PATH)/,$(UTL_SRC:.c=.o))
+
+# UTL
+IO_SRC_PATH=$(SRC_PATH)/io
+IO_OBJ_PATH=$(OBJ_PATH)/io
+IO_SRC=inb.c
+IO_SRC+=outb.c
+IO_SRC+=outw.c
+
+IO_SOURCES = $(addprefix $(IO_SRC_PATH)/,$(IO_SRC))
+IO_OBJECTS = $(addprefix $(IO_OBJ_PATH)/,$(IO_SRC:.c=.o))
 
 LINK_SRC=link/link.ld
 
 SOURCES=$(addprefix $(SRC_PATH)/,$(SRC_SRC)) \
 		$(addprefix $(TRM_SRC_PATH)/,$(TRM_SRC)) \
+		$(addprefix $(IO_SRC_PATH)/,$(IO_SRC)) \
 		$(addprefix $(UTL_SRC_PATH)/,$(UTL_SRC))
 
 OBJECTS=$(addprefix $(ASM_OBJ_PATH)/,$(ASM_SRC:.s=.o)) \
 		$(addprefix $(OBJ_PATH)/,$(SRC:.c=.o)) \
 		$(addprefix $(TRM_OBJ_PATH)/,$(TRM_SRC:.c=.o)) \
+		$(addprefix $(IO_OBJ_PATH)/,$(IO_SRC:.c=.o)) \
 		$(addprefix $(UTL_OBJ_PATH)/,$(UTL_SRC:.c=.o))
 
 # Флаги компилятора языка C
@@ -93,8 +111,8 @@ nasm:
 	@as $(ASFLAGS) $(ASM_SOURCES) -o ${ASM_OBJECTS}
 	@echo "$(BOLD)build:  nasm ---------------------- $(GREEN)[🌒]$(RESET)"
 
-sources: $(SRC_OBJECTS) $(TRM_OBJECTS) $(UTL_OBJECTS) Makefile
-	@echo "$(BOLD)        kernel, terminal, utils --- $(GREEN)[🌓]$(RESET)"
+sources: $(SRC_OBJECTS) ${IO_OBJECTS} $(TRM_OBJECTS) $(UTL_OBJECTS) Makefile
+	@echo "$(BOLD)        kernel, terminal, utils, io $(GREEN)[🌓]$(RESET)"
 
 # /*
 # ** ====================== MAKE Terminal ==========================
@@ -115,6 +133,13 @@ $(TRM_OBJ_PATH)/%.o : $(TRM_SRC_PATH)/%.c $(HEADERS) Makefile
 # */
 $(UTL_OBJ_PATH)/%.o : $(UTL_SRC_PATH)/%.c $(HEADERS) Makefile
 	@mkdir -p $(UTL_OBJ_PATH) 2> tmp.log
+	@cc -m32 -ffreestanding $(FLAGS) -I $(HDIR) -c $< -o $@ 2> tmp.log
+
+# /*
+# ** ====================== MAKE IO ===============================
+# */
+$(IO_OBJ_PATH)/%.o : $(IO_SRC_PATH)/%.c $(HEADERS) Makefile
+	@mkdir -p $(IO_OBJ_PATH) 2> tmp.log
 	@cc -m32 -ffreestanding $(FLAGS) -I $(HDIR) -c $< -o $@ 2> tmp.log
 
 

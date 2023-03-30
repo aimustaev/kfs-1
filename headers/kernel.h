@@ -2,6 +2,7 @@
 # define KERNEL_H
 
 #include "types.h"
+#include "io.h"
 #include "terminal.h"
 #include "utils.h"
 

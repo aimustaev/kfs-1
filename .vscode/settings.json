@@ -5,6 +5,9 @@
         "terminal.h": "c",
         "kernel.h": "c",
         "types.h": "c",
-        "utils.h": "c"
+        "utils.h": "c",
+        "io.h": "c",
+        "stdint.h": "c",
+        "stddef.h": "c"
     }
 }
