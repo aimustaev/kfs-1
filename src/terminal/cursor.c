@@ -13,8 +13,8 @@ uint16_t get_cursor_position(void)
 
 void set_cursor_position(uint16_t position)
 {
-    outb(0x3D4, 14);
+    outb(0x3D4, 0x0E);
     outb(0x3D5, (position >> 8));
-    outb(0x3D4, 15);
+    outb(0x3D4, 0x0F);
     outb(0x3D5, position);
 }

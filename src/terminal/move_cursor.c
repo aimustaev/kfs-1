@@ -22,4 +22,5 @@ void move_cursor_next_line(t_terminal *term)
     term->column = 0;
     if (++term->row == VGA_HEIGHT)
         term->row = 0;
+    set_cursor_position(term->row * VGA_WIDTH + term->column);
 }
