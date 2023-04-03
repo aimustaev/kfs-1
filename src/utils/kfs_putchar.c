@@ -3,5 +3,5 @@
 void kfs_putchar(t_terminal *term, char c)
 {
 	set_value_by_position(term, c);
-	move_cursor_left(term);
+	term->cursor->move(term->cursor, CURSOR_MOVE_RIGHT);
 }

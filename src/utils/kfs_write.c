@@ -6,7 +6,7 @@ void kfs_write(t_terminal *term, const char *data, size_t size)
 	{
 		if (data[i] == 10)
 		{
-			move_cursor_next_line(term);
+			term->cursor->move(term->cursor, CURSOR_MOVE_NEXT_LINE);
 		}
 		else
 		{

@@ -1,16 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   kernel.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aimustaev <aimustaev@student.42.fr>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/04 01:13:16 by aimustaev         #+#    #+#             */
+/*   Updated: 2023/04/04 01:42:14 by aimustaev        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef KERNEL_H
-# define KERNEL_H
+#define KERNEL_H
 
 #include "types.h"
 #include "io.h"
+#include "keyboard.h"
 #include "terminal.h"
 #include "utils.h"
-
-static t_terminal g_term;
-
-// static struct kfs_terminal g_terminal;
-
-void terminal_write(t_terminal term, const char *data, size_t size);
-void terminal_putchar(t_terminal *term, char c);
+#include "cursor.h"
 
 #endif

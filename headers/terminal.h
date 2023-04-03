@@ -1,8 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   terminal.h                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: aimustaev <aimustaev@student.42.fr>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/04/04 01:13:20 by aimustaev         #+#    #+#             */
+/*   Updated: 2023/04/04 01:22:20 by aimustaev        ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef VGA_H
 #define VGA_H
 
 #include "types.h"
-/* Hardware text mode color constants. */
+#include "cursor.h"
+
 enum vga_color
 {
 	VGA_COLOR_BLACK = 0,
@@ -26,25 +39,18 @@ enum vga_color
 static const size_t VGA_WIDTH = 80;
 static const size_t VGA_HEIGHT = 25;
 
-
 typedef struct Terminal
 {
-	size_t row;
-	size_t column;
+	t_cursor *cursor;
 	uint8_t color;
 	uint16_t *buffer;
+
 } t_terminal;
 
 // TERMINAL
 void terminal_setcolor(t_terminal *term, uint8_t color);
 t_terminal terminal_initialize(void);
 void set_value_by_position(t_terminal *term, char c);
-void move_cursor_left(t_terminal *term);
-void move_cursor_down(t_terminal *term);
-void move_cursor_next_line(t_terminal *term);
-uint16_t get_cursor_position(void);
-void set_cursor_position(uint16_t position);
-//VGA
 uint8_t vga_entry_color(enum vga_color fg, enum vga_color bg);
 uint16_t vga_entry(unsigned char uc, uint8_t color);
 

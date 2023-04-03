@@ -18,3 +18,8 @@ void set_cursor_position(uint16_t position)
     outb(0x3D4, 0x0F);
     outb(0x3D5, position);
 }
+
+size_t get_position(t_cursor *this)
+{
+    return this->row * VGA_WIDTH + this->column;
+}
