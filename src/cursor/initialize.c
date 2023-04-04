@@ -13,5 +13,6 @@ t_cursor *cursor_initialize(void)
     cursor->right = &cursor_move_right;
     cursor->next_line = &cursor_move_next_line;
     cursor->move = &cursor_move;
-    return &cursor;
+
+    return cursor;
 }

@@ -2,12 +2,7 @@
     "C_Cpp.errorSquiggles": "disabled",
     "files.associations": {
         "*.ts": "typescript",
-        "terminal.h": "c",
-        "kernel.h": "c",
-        "types.h": "c",
-        "utils.h": "c",
-        "io.h": "c",
-        "stdint.h": "c",
-        "stddef.h": "c"
+        "__string": "c",
+        "ios": "c"
     }
 }
