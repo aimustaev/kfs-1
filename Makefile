@@ -200,11 +200,5 @@ start_disk:
 	qemu-system-x86_64 ./hard_disk.img
 
 re: fclean all
-# re_disk:
-# 	@mount /dev/loop7p1 /mnt/test
-# 	@chmod 777 /mnt/test/boot/$(NAME)
-# 	@rm -rf /mnt/test/boot/$(NAME)
-# 	@cp $(NAME) /mnt/test/boot
-# 	@umount /mnt/test
 
 .PHONY: all link
