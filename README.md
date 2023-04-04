@@ -13,8 +13,12 @@
 - `cp ./kernel /mnt/os/boot/`
 - `make start_disk`
 
-check_sum hard_disk.img
+## check_sum hard_disk.img
 
 ```
 MD5(hard_disk.img)= 99f2e825e787adc8f60eb57a5b7af340
 ```
+
+## Доп материалы:
+- https://osdev.fandom.com/ru/wiki/Категория:Мультизагрузка:_Практическая_реализация_ядра_с_поддержкой_Multiboot
+- https://wiki.osdev.org/Main_Page
